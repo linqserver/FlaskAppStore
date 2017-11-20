@@ -25,7 +25,6 @@ mysql.init_app(app)
 conn = mysql.connect()
 
 
-
 # Index
 @app.route('/')
 def index():
@@ -51,14 +50,13 @@ def products():
 
     if result > 0:
         return render_template('products.html', products=products)
+        cur.close()
     else:
         msg = 'No products Found'
         return render_template('products.html', msg=msg)
-    # Close connection
-    cur.close()
 
 
-#Single product
+# Single product
 @app.route('/product/<string:id>/')
 def product(id):
     # Create cursor
@@ -83,7 +81,6 @@ class RegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
     confirm = PasswordField('Confirm Password')
-
 
 
 # User Register
@@ -156,6 +153,7 @@ def login():
 
     return render_template('login.html')
 
+
 # Check if user logged in
 def is_logged_in(f):
     @wraps(f)
@@ -167,6 +165,7 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+
 # Logout
 @app.route('/logout')
 @is_logged_in
@@ -174,6 +173,7 @@ def logout():
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
+
 
 # Dashboard
 @app.route('/dashboard')
@@ -183,22 +183,20 @@ def dashboard():
     if session['username'] != 'admin':
         return redirect(url_for('products'))
 
-
     # Create cursor
     cur = conn.cursor()
 
     # Get products
     result = cur.callproc("sp_getAll")
 
-    #products = cur.fetchall()
-
     if result.__len__() > 0:
-        return render_template('dashboard.html', products=products)
+        return render_template('dashboard.html', products=result.catchall())
+        cur.close()
     else:
         msg = 'No products Found'
         return render_template('dashboard.html', msg=msg)
     # Close connection
-    cur.close()
+
 
 
 # product Form Class
@@ -206,6 +204,7 @@ class productForm(Form):
     name = StringField('Name')
     price = StringField('Price')
     stock = StringField('Stock')
+
 
 # Add product
 @app.route('/add_product', methods=['GET', 'POST'])
