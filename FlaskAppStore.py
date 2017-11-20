@@ -1,19 +1,15 @@
 from flask import Flask, render_template, flash, redirect, json, url_for, session, request, logging
-from data import Products
 
 ''' *******************************************************************
     *   IF ERROR on IMPORT MySQL ext flask mysql 
     *   THEN in terminal:
-    *   irtualenv yournewvirtualenv --python=/usr/bin/python3.4
+    *   virtualenv yournewvirtualenv --python=/usr/bin/python3.4
     *   then
     *   pip install flask-mysql
 '''
 from flaskext.mysql import MySQL
-
-
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
-from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
 
 mysql = MySQL()
@@ -28,7 +24,7 @@ mysql.init_app(app)
 
 conn = mysql.connect()
 
-products = Products()
+
 
 # Index
 @app.route('/')
@@ -192,11 +188,11 @@ def dashboard():
     cur = conn.cursor()
 
     # Get products
-    result = cur.execute("SELECT * FROM products")
+    result = cur.callproc("sp_getAll")
 
-    products = cur.fetchall()
+    #products = cur.fetchall()
 
-    if result > 0:
+    if result.__len__() > 0:
         return render_template('dashboard.html', products=products)
     else:
         msg = 'No products Found'
@@ -204,10 +200,12 @@ def dashboard():
     # Close connection
     cur.close()
 
+
 # product Form Class
 class productForm(Form):
-    title = StringField('Title', [validators.Length(min=1, max=200)])
-    body = TextAreaField('Body', [validators.Length(min=30)])
+    name = StringField('Name')
+    price = StringField('Price')
+    stock = StringField('Stock')
 
 # Add product
 @app.route('/add_product', methods=['GET', 'POST'])
@@ -215,14 +213,15 @@ class productForm(Form):
 def add_product():
     form = productForm(request.form)
     if request.method == 'POST' and form.validate():
-        title = form.title.data
-        body = form.body.data
+        name = form.name.data
+        price = form.price.data
+        stock = form.stock.data
 
         # Create Cursor
         cur = conn.cursor()
 
         # Execute
-        cur.execute("INSERT INTO products(title, body, author) VALUES(%s, %s, %s)", (title, body, session['username']))
+        cur.execute("INSERT INTO products(name, price, stock) VALUES(%s, %s, %s)", (name, price, stock))
 
         # Commit to DB
         conn.commit()
