@@ -44,12 +44,11 @@ def products():
     cur = conn.cursor()
 
     # Get products
-    result = cur.execute("SELECT * FROM products")
+    cur.execute("SELECT * FROM products")
+    result = cur.fetchall()
 
-    products = cur.fetchall()
-
-    if result > 0:
-        return render_template('products.html', products=products)
+    if result.__len__() > 0:
+        return render_template('products.html', products=result)
         cur.close()
     else:
         msg = 'No products Found'
@@ -60,15 +59,10 @@ def products():
 @app.route('/product/<string:id>/')
 def product(id):
     # Create cursor
-
     cur = conn.cursor()
-
     # Get product
-    result = cur.execute("SELECT * FROM products WHERE id = %s", [id])
-
-    product = cur.fetchone()
-
-    return render_template('product.html', product=product)
+    result = cur.execute("SELECT * FROM products WHERE id = %s", [id]).fetchone()
+    return render_template('product.html', product=result)
 
 
 # Register Form Class
@@ -174,6 +168,12 @@ def logout():
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
 
+# product Form Class
+class ProductForm(Form):
+    name = StringField('Name')
+    price = StringField('Price')
+    stock = StringField('Stock')
+
 
 # Dashboard
 @app.route('/dashboard')
@@ -187,45 +187,38 @@ def dashboard():
     cur = conn.cursor()
 
     # Get products
-    result = cur.callproc("sp_getAll")
-
-    if result.__len__() > 0:
-        return render_template('dashboard.html', products=result.catchall())
-        cur.close()
+    # result = cur.callproc('sp_getAllProducts')
+    # products = cur.fetchall()
+    result = cur.execute("SELECT * FROM products")
+    articles = cur.fetchall()
+    if result > 0:
+        return render_template('dashboard.html', products=articles)
     else:
         msg = 'No products Found'
         return render_template('dashboard.html', msg=msg)
-    # Close connection
-
-
-
-# product Form Class
-class productForm(Form):
-    name = StringField('Name')
-    price = StringField('Price')
-    stock = StringField('Stock')
+    cur.close()
 
 
 # Add product
 @app.route('/add_product', methods=['GET', 'POST'])
 @is_logged_in
 def add_product():
-    form = productForm(request.form)
-    if request.method == 'POST' and form.validate():
-        name = form.name.data
-        price = form.price.data
-        stock = form.stock.data
+    form = ProductForm(request.form)
+    if request.method == 'POST':
+        _name = form.name.data
+        _price = form.price.data
+        _stock = form.stock.data
 
         # Create Cursor
         cur = conn.cursor()
 
         # Execute
-        cur.execute("INSERT INTO products(name, price, stock) VALUES(%s, %s, %s)", (name, price, stock))
+        cur.execute("INSERT INTO products(name, price, stock) VALUES(%s, %s, %s)", (_name, _price, _stock))
 
         # Commit to DB
         conn.commit()
 
-        #Close connection
+        # Close connection
         cur.close()
 
         flash('product Created', 'success')
@@ -248,7 +241,7 @@ def edit_product(id):
     product = cur.fetchone()
     cur.close()
     # Get form
-    form = productForm(request.form)
+    form = ProductForm(request.form)
 
     # Populate product form fields
     form.title.data = product['title']

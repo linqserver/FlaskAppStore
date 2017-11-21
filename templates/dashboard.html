@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <h1>Dashboard <small> Welcome {{session.username}}</small></h1>
+  <h1>Dashboard</h1>
   <a class="btn btn-success" href="/add_product"> Add Product</a>
   <hr>
   <table class="table table-striped">
@@ -15,11 +15,11 @@
     </tr>
     {% for product in products %}
       <tr>
-        <td>{{product.idproduct}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.stock}}</td>
-        <td><a href="edit_product/{{product.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td>{{product[0]}}</td>
+        <td>{{product[1]}}</td>
+        <td>{{product[2]}}</td>
+        <td>{{product[3]}}</td>
+        <td><a href="edit_product/{{product.idproduct}}" class="btn btn-default pull-right">Edit</a></td>
         <td>
           <form action="{{url_for('delete_product', id=product.id)}}" method="post">
             <input type="hidden" name="_method" value="DELETE">
