@@ -43,16 +43,14 @@ def products():
     # Create cursor
     cur = conn.cursor()
 
-    # Get products
-    cur.execute("SELECT * FROM products")
-    result = cur.fetchall()
-
-    if result.__len__() > 0:
-        return render_template('products.html', products=result)
-        cur.close()
+    result = cur.execute("SELECT * FROM products")
+    articles = cur.fetchall()
+    if result > 0:
+        return render_template('products.html', products=articles)
     else:
         msg = 'No products Found'
         return render_template('products.html', msg=msg)
+    cur.close()
 
 
 # Single product
@@ -61,7 +59,9 @@ def product(id):
     # Create cursor
     cur = conn.cursor()
     # Get product
-    result = cur.execute("SELECT * FROM products WHERE id = %s", [id]).fetchone()
+    cur.execute("SELECT * FROM products WHERE idproduct = %s", [id])
+    result = cur.fetchone()
+
     return render_template('product.html', product=result)
 
 

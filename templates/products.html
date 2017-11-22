@@ -1,10 +1,25 @@
 {% extends 'layout.html' %}
 
+
 {% block body %}
   <h1>Products</h1>
-  <ul class="list-group">
+
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th></th>
+    </tr>
     {% for product in products %}
-      <li class="list-group-item"><a href="product/{{product.idproduct}}">{{product.name}}</a></li>
+      <tr>
+        <td><h4>{{product[0]}}</h4></td>
+        <td><h4><a href="product/{{product[0]}}" >{{product[1]}}</a></h4></td>
+        <td><h4>&#8364; {{product[2]}}</h4></td><td><h4>{{product[3]}}</h4></td>
+        <td><a href="buy_product/{{product[0]}}" class="btn btn-success btn-lg pull-left">Buy</a></td>
+      </tr>
     {% endfor %}
-  </ul>
+  </table>
 {% endblock %}
