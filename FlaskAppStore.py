@@ -31,7 +31,7 @@ def basket():
     # Create cursor
     cur = conn.cursor()
 
-    result = cur.execute("SELECT * FROM products")
+    result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
     articles = cur.fetchall()
     if result > 0:
         return render_template('basket.html', products=articles)
@@ -230,7 +230,7 @@ def add_product():
         cur = conn.cursor()
 
         # Execute
-        cur.execute("INSERT INTO products(name, price, stock) VALUES(%s, %s, %s)", (_name, _price, _stock))
+        cur.execute("INSERT INTO products(prod_name, prod_price, prod_stock) VALUES(%s, %s, %s)", (_name, _price, _stock))
 
         # Commit to DB
         conn.commit()
@@ -253,7 +253,7 @@ def edit_product(id):
     cur = conn.cursor()
 
     # Get product by id
-    result = cur.execute("SELECT * FROM products WHERE id = %s", [id])
+    result = cur.execute("SELECT * FROM products WHERE prod_id = %s", [id])
 
     product = cur.fetchone()
     cur.close()
@@ -272,7 +272,7 @@ def edit_product(id):
         cur = conn.cursor()
         app.logger.info(title)
         # Execute
-        cur.execute ("UPDATE products SET title=%s, body=%s WHERE id=%s",(title, body, id))
+        cur.execute ("UPDATE products SET title=%s, body=%s WHERE prod_id=%s",(title, body, id))
         # Commit to DB
         conn.commit()
 
@@ -293,7 +293,7 @@ def delete_product(id):
     cur = conn.cursor()
 
     # Execute
-    cur.execute("DELETE FROM products WHERE id = %s", [id])
+    cur.execute("DELETE FROM products WHERE prod_id = %s", [id])
 
     # Commit to DB
     conn.commit()
