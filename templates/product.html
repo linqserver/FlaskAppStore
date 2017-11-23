@@ -2,9 +2,48 @@
 
 
 {% block body %}
-  <h1>{{product[1]}}</h1>
-    <div>
-        <a href="buy_product" class="btn btn-success btn-lg pull-left">Buy</a>
-    </div>
-  </table>
+<div class="borderless">
+    <ul class="list-group ">
+
+     <li class="list-group-item" style="border: none">
+         <h1>{{product[1]}}</h1>
+     </li>
+     <li class="list-group-item" style="border: none">
+        <table class="table table-striped ">
+            <tr>
+                <th class ="text-center">Image</th>
+                <th>Description:</th>
+            </tr>
+            <tr>
+                <td>
+                    <img alt="Product" src={{ url_for('static', filename = ''+product[4])}}  height="185"><img>
+                </td>
+                <td class="center-block">
+                    {{product[5]}}
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none; text-align: center;">
+                     <h4>
+                         Price:
+                     </h4>
+                    <h3>
+                          &#8364; {{product[2]}}
+                     </h3>
+                     <h3>
+                         <a href="add_to_basket" class="btn btn-success btn-md  ">Add to Basket</a>
+                     </h3>
+                </td>
+            </tr>
+        </table>
+     </li>
+     <li class="list-group-item" style="border: none; margin-top: -20px">
+
+     </li>
+
+  </ul>
+
+</div>
+
+
 {% endblock %}

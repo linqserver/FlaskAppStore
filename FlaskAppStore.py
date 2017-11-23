@@ -28,7 +28,17 @@ conn = mysql.connect()
 # Basket
 @app.route('/basket.html')
 def basket():
-    return render_template('basket.html')
+    # Create cursor
+    cur = conn.cursor()
+
+    result = cur.execute("SELECT * FROM products")
+    articles = cur.fetchall()
+    if result > 0:
+        return render_template('basket.html', products=articles)
+    else:
+        msg = 'No products Found'
+        return render_template('basket.html', msg=msg)
+    cur.close()
 
 
 

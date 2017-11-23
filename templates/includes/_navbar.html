@@ -15,7 +15,6 @@
             <li><a href="/about">About</a></li>
             <li><a href="/products">Products</a></li>
           </ul>
-
           <ul class="nav navbar-nav navbar-right">
             {% if session.logged_in %}
              {% if session['username'] == "admin"%}
@@ -24,15 +23,9 @@
                  <li><a href="/basket.html">
                      <img border="0" alt="Basket" src={{ url_for('static', filename = 'images/basket_icon.png') }} width="25" height="25"><img  ></a></li>
                  <li>
-
                  <a href="/user" >{{session.username}}'s Account</a>
-
-
-
                  </li>
-
                   {% endif %}
-
               <li><a href="/logout">Logout</a></li>
             {% else %}
               <li><a href="/register">Register</a></li>
