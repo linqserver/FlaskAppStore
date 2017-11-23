@@ -25,6 +25,13 @@ mysql.init_app(app)
 conn = mysql.connect()
 
 
+# Basket
+@app.route('/basket.html')
+def basket():
+    return render_template('basket.html')
+
+
+
 # Index
 @app.route('/')
 def index():

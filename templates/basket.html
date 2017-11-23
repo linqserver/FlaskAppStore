@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Basket</h1>
+  <a class="btn btn-danger" href="/empty_basket"> Empty Basket</a>
+  <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for product in products %}
+      <tr>
+
+        <td>{{product[1]}}</td>
+        <td>&#8364; {{product[2]}}</td>
+        <td>{{product[3]}}</td>
+        <td>
+            <div class="row nowrap padding-top-25">
+                    <div class="span4 right-align nowrap margin-top-5">QR-code time out:</div>
+                        <div class="span8 bold-text left-align padding_adjust_i">
+                            <div class="inline">
+                                <div class="row">
+                                    <div class="col-xs-3 col-xs-offset-3">
+                                        <div class="btn-group number-spinner">
+                                            <span class="input-prepend data-dwn">
+                                                <button class="btn btn-default" data-dir="dwn"><i class="fa_icon icon-minus"></i></button>
+                                            </span>
+                                            <input type="text" class="form-control input-box text-center" value="1" min="0" max="180" style="max-width:100px;">
+                                            <span class="input-append data-up">
+                                                <button class="btn btn-default" data-dir="up"><i class="fa_icon icon-plus"></i></button>
+                                            </span>
+                                        </div> <span class="fielderror"><i class="fa_icon icon-minus-sign"></i>numeric input required</span><span class="datatype"><i class="fa_icon icon-info-sign"></i>numeric (number of seconds)</span> <span class="charcount"><i class="fa_icon icon-info-sign"></i>min. 0 - max. 180</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </td>
+        <td>
+          <form action="{{url_for('delete_product', id=product.id)}}" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
+
+
+
+
+
+<script>
+$(function() {
+    var action;
+    $(".number-spinner button").mousedown(function () {
+        btn = $(this);
+        input = btn.closest('.number-spinner').find('input');
+        btn.closest('.number-spinner').find('button').prop("disabled", false);
+
+        if (btn.attr('data-dir') == 'up') {
+            action = setInterval(function(){
+                if ( input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max')) ) {
+                    input.val(parseInt(input.val())+1);
+                }else{
+                    btn.prop("disabled", true);
+                    clearInterval(action);
+                }
+            }, 50);
+    	} else {
+            action = setInterval(function(){
+                if ( input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min')) ) {
+                    input.val(parseInt(input.val())-1);
+                }else{
+                    btn.prop("disabled", true);
+                    clearInterval(action);
+                }
+            }, 50);
+    	}
+    }).mouseup(function(){
+        clearInterval(action);
+    });
+});
+</script>
+
+{% endblock %}
