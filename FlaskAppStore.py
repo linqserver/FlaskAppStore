@@ -25,16 +25,48 @@ mysql.init_app(app)
 conn = mysql.connect()
 
 
+# add_to_basket
+def add_to_basket(id):
+    # Create cursor
+    cur = conn.cursor()
+
+    #result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
+
+    # Get basket information
+    # getProductsFromBasket returns: [0]prod_id ,[1]prod_name, [2]qty, [3]prod_price
+    # result =
+    user = session['username']
+
+    cur.callproc('getProductsFromBasket', [user])
+    bskt = cur.fetchall()
+
+    if 1 > 0:
+        return render_template('basket.html', products=bskt)
+    else:
+        msg = 'No products Found'
+        return render_template('basket.html', msg=msg)
+    cur.close()
+
+
+
 # Basket
-@app.route('/basket.html')
+@app.route('/basket.html', methods=['GET', 'POST'])
 def basket():
     # Create cursor
     cur = conn.cursor()
 
-    result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
-    articles = cur.fetchall()
-    if result > 0:
-        return render_template('basket.html', products=articles)
+    #result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
+
+    # Get basket information
+    # getProductsFromBasket returns: [0]prod_id ,[1]prod_name, [2]qty, [3]prod_price
+    # result =
+    user = session['username']
+
+    cur.callproc('getProductsFromBasket', [user])
+    bskt = cur.fetchall()
+
+    if bskt > 0:
+        return render_template('basket.html', products=bskt)
     else:
         msg = 'No products Found'
         return render_template('basket.html', msg=msg)
@@ -76,7 +108,7 @@ def product(id):
     # Create cursor
     cur = conn.cursor()
     # Get product
-    cur.execute("SELECT * FROM products WHERE idproduct = %s", [id])
+    cur.execute("SELECT * FROM products WHERE prod_id = %s", [id])
     result = cur.fetchone()
 
     return render_template('product.html', product=result)

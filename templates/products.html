@@ -2,26 +2,35 @@
 
 
 {% block body %}
-  <h1>Products</h1>
+    <h1>Products</h1>
 
-  <hr>
-  <table class="table table-striped ">
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stock</th>
-      <th></th>
-    </tr>
-    {% for product in products %}
-      <tr>
-        <td >
-            <img alt="Product" src={{ url_for('static', filename = ''+product[4])}}  height="80"><img  ></a></li>
-        </td>
-        <td class="veryalign-middle"><h4><a href="product/{{product[0]}}" >{{product[1]}}</a></h4></td>
-        <td class="align-middle"><h4>&#8364; {{product[2]}}</h4></td><td><h4>{{product[3]}}</h4></td>
-        <td class="align-middle"><a href="buy_product/{{product[0]}}" class="btn btn-success btn-lg pull-left">Buy</a></td>
-      </tr>
-    {% endfor %}
-  </table>
+    <hr>
+    <smal>Max order size is 10 per product.</smal>
+    <table class="table table-striped ">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th></th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td >
+                    <img alt="Product" src={{ url_for('static', filename = ''+product[4])}}  height="80"><img  ></a></li>
+                </td>
+                <td class="veryalign-middle"><h4><a href="product/{{product[0]}}" >{{product[1]}}</a></h4></td>
+                <td class="align-middle"><h4>&#8364; {{product[2]}}</h4></td><td>
+                <h4>
+                    {% if  product[2]  > 10%}
+                        10 +
+                    {% else %}
+                        {{product[2]}}
+                    {% endif %}
+                </h4>
+            </td>
+                <td class="align-middle"><a href="add_to_basket/{{product[0]}}" class="btn btn-success pull-left">Add to Basket</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
