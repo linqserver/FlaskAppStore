@@ -22,96 +22,129 @@ app.config['MYSQL_DATABASE_DB'] = 'RafalStoreDb'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
-conn = mysql.connect()
+
+basketVariable = 'images/basket_icon.png'
+
+
+# this holds current number of items for a given user
+
+
+# returns true if current user have items in the basket
+def check_basket_status():
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+    user = session['username']
+    cur.callproc('sp_basketCheckForContent', [user])
+    bskt = cur.fetchone()
+    global basketVariable
+    if bskt[0] == 1:
+
+        basketVariable = 'images/basket_icon_full2.png'
+        msg = 'check_basket_status returns one'
+        print(msg, bskt[0])
+        conn.close()
+        return [bskt]
+    else:
+
+        basketVariable = 'images/basket_icon.png'
+        msg = 'check_basket_status returns zero'
+        print(msg, bskt[0])
+        conn.close()
+        return [bskt]
 
 
 # add_to_basket
 def add_to_basket(id):
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
 
-    #result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
+    # result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
 
     # Get basket information
     # getProductsFromBasket returns: [0]prod_id ,[1]prod_name, [2]qty, [3]prod_price
     # result =
     user = session['username']
 
-    cur.callproc('getProductsFromBasket', [user])
+    cur.callproc('sp_basketAddProduct', [id][user])
     bskt = cur.fetchall()
-
-    if 1 > 0:
-        return render_template('basket.html', products=bskt)
-    else:
-        msg = 'No products Found'
-        return render_template('basket.html', msg=msg)
-    cur.close()
-
-
-
-# Basket
-@app.route('/basket.html', methods=['GET', 'POST'])
-def basket():
-    # Create cursor
-    cur = conn.cursor()
-
-    #result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
-
-    # Get basket information
-    # getProductsFromBasket returns: [0]prod_id ,[1]prod_name, [2]qty, [3]prod_price
-    # result =
-    user = session['username']
-
-    cur.callproc('getProductsFromBasket', [user])
-    bskt = cur.fetchall()
-
+    conn.close()
     if bskt > 0:
         return render_template('basket.html', products=bskt)
     else:
         msg = 'No products Found'
         return render_template('basket.html', msg=msg)
-    cur.close()
 
+
+# Basket
+@app.route('/basket.html', methods=['GET', 'POST'])
+def basket():
+    check_basket_status()
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+
+    # result = cur.execute("SELECT * FROM basket_table where user_name = %s", session['username'])
+
+    # Get basket information
+    # getProductsFromBasket returns: [0]prod_id ,[1]prod_name, [2]qty, [3]prod_price
+    # result =
+    user = session['username']
+
+    cur.callproc('sp_basketGetProducts', [user])
+    bskt = cur.fetchall()
+
+    conn.close()
+    if bskt.__len__() > 0:
+        return render_template('basket.html', products=bskt, basketStatus=basketVariable)
+    else:
+        msg = 'No products Found'
+        return render_template('basket.html', msg=msg, basketStatus=basketVariable)
 
 
 # Index
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('home.html', basketStatus=basketVariable)
 
 
 # About
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', basketStatus=basketVariable)
 
 
 # products
 @app.route('/products')
 def products():
+    check_basket_status()
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
 
     result = cur.execute("SELECT * FROM products")
     articles = cur.fetchall()
+    conn.close()
     if result > 0:
-        return render_template('products.html', products=articles)
+        return render_template('products.html', products=articles, basketStatus=basketVariable)
     else:
         msg = 'No products Found'
-        return render_template('products.html', msg=msg)
-    cur.close()
+        return render_template('products.html', msg=msg, basketStatus=basketVariable)
 
 
 # Single product
 @app.route('/product/<string:id>/')
 def product(id):
+    check_basket_status()
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
     # Get product
     cur.execute("SELECT * FROM products WHERE prod_id = %s", [id])
     result = cur.fetchone()
-
-    return render_template('product.html', product=result)
+    conn.close()
+    return render_template('product.html', product=result, basketStatus=basketVariable)
 
 
 # Register Form Class
@@ -137,16 +170,16 @@ def register():
         password = sha256_crypt.encrypt(str(form.password.data))
 
         # Create cursor
-
+        conn = mysql.connect()
         cur = conn.cursor()
 
         cur.callproc('sp_createUser', (name, username, email, password))
 
         # Commit to DB
-        conn.commit();
+        conn.commit()
 
         # Close connection
-        cur.close()
+        conn.close()
 
         flash('You are now registered and can log in', 'success')
 
@@ -164,6 +197,7 @@ def login():
         password_candidate = request.form['password']
 
         # Create cursor
+        conn = mysql.connect()
         cur = conn.cursor()
 
         # Get user by username
@@ -173,7 +207,7 @@ def login():
             # Get stored hash
             data = cur.fetchone()
             password = data[4]
-
+            conn.close()
             # Compare Passwords
             if sha256_crypt.verify(password_candidate, password):
                 # Passed
@@ -184,12 +218,13 @@ def login():
                 if username == 'admin':
                     return redirect(url_for('dashboard'))
                 else:
+                    check_basket_status()
                     return redirect(url_for('products'))
             else:
                 error = 'Invalid login'
                 return render_template('login.html', error=error)
-            # Close connection
-            cur.close()
+                # Close connection
+
         else:
             error = 'Username not found'
             return render_template('login.html', error=error)
@@ -206,6 +241,7 @@ def is_logged_in(f):
         else:
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
+
     return wrap
 
 
@@ -214,8 +250,10 @@ def is_logged_in(f):
 @is_logged_in
 def logout():
     session.clear()
+    basketVariable = 0
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
+
 
 # product Form Class
 class ProductForm(Form):
@@ -228,11 +266,11 @@ class ProductForm(Form):
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-
     if session['username'] != 'admin':
         return redirect(url_for('products'))
 
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
 
     # Get products
@@ -240,12 +278,12 @@ def dashboard():
     # products = cur.fetchall()
     result = cur.execute("SELECT * FROM products")
     articles = cur.fetchall()
+    conn.close()
     if result > 0:
-        return render_template('dashboard.html', products=articles)
+        return render_template('dashboard.html', products=articles, basketStatus=basketVariable)
     else:
         msg = 'No products Found'
-        return render_template('dashboard.html', msg=msg)
-    cur.close()
+        return render_template('dashboard.html', msg=msg, basketStatus=basketVariable)
 
 
 # Add product
@@ -259,22 +297,24 @@ def add_product():
         _stock = form.stock.data
 
         # Create Cursor
+        conn = mysql.connect()
         cur = conn.cursor()
 
         # Execute
-        cur.execute("INSERT INTO products(prod_name, prod_price, prod_stock) VALUES(%s, %s, %s)", (_name, _price, _stock))
+        cur.execute("INSERT INTO products(prod_name, prod_price, prod_stock) VALUES(%s, %s, %s)",
+                    (_name, _price, _stock))
 
         # Commit to DB
         conn.commit()
 
         # Close connection
-        cur.close()
+        conn.close()
 
         flash('product Created', 'success')
 
         return redirect(url_for('dashboard'))
 
-    return render_template('add_product.html', form=form)
+    return render_template('add_product.html', form=form, basketStatus=basketVariable)
 
 
 # Edit product
@@ -282,6 +322,7 @@ def add_product():
 @is_logged_in
 def edit_product(id):
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
 
     # Get product by id
@@ -304,24 +345,26 @@ def edit_product(id):
         cur = conn.cursor()
         app.logger.info(title)
         # Execute
-        cur.execute ("UPDATE products SET title=%s, body=%s WHERE prod_id=%s",(title, body, id))
+        cur.execute("UPDATE products SET title=%s, body=%s WHERE prod_id=%s", (title, body, id))
         # Commit to DB
         conn.commit()
 
-        #Close connection
-        cur.close()
+        # Close connection
+        conn.close()
 
         flash('product Updated', 'success')
 
         return redirect(url_for('dashboard'))
+    conn.close()
+    return render_template('edit_product.html', form=form, basketStatus=basketVariable)
 
-    return render_template('edit_product.html', form=form)
 
 # Delete product
 @app.route('/delete_product/<string:id>', methods=['POST'])
 @is_logged_in
 def delete_product(id):
     # Create cursor
+    conn = mysql.connect()
     cur = conn.cursor()
 
     # Execute
@@ -330,12 +373,13 @@ def delete_product(id):
     # Commit to DB
     conn.commit()
 
-    #Close connection
-    cur.close()
+    # Close connection
+    conn.close()
 
     flash('product Deleted', 'success')
 
-    return redirect(url_for('dashboard'))
+    return redirect(url_for('dashboard'), basketStatus=basketVariable)
+
 
 if __name__ == '__main__':
     app.secret_key = 'secret123'
