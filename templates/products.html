@@ -8,7 +8,7 @@
     <smal>Max order size is 10 per product.</smal>
     <table class="table table-striped ">
         <tr>
-            <th>Image</th>
+            <th >Image</th>
             <th>Name</th>
             <th>Price</th>
             <th>Stock</th>
@@ -16,20 +16,22 @@
         </tr>
         {% for product in products %}
             <tr>
-                <td >
-                    <img alt="Product" src={{ url_for('static', filename = ''+product[4])}}  height="80"><img  ></a></li>
+                <td style="width: 120px;">
+                    <img alt="Product" src={{ url_for('static', filename = ""+product[4])}}  height="80"><img></a></li>
                 </td>
-                <td class="veryalign-middle"><h4><a href="product/{{product[0]}}" >{{product[1]}}</a></h4></td>
-                <td class="align-middle"><h4>&#8364; {{product[2]}}</h4></td><td>
-                <h4>
-                    {% if  product[2]  > 10%}
-                        10 +
+                <td class="veryalign-middle" style="padding-top: 30px;"><h4><a href="product/{{ product[0] }}">{{ product[1] }}</a></h4></td>
+                <td class="align-middle" style="padding-top: 30px;"><h4>&#8364; {{ product[2] }}</h4></td>
+                <td style="padding-top: 30px;">
+                    {% if  product[3]>10 %}
+                        <h4> Max Order Possible</h4>
                     {% else %}
-                        {{product[2]}}
+                        <h4>{{ product[3] }}</h4>
                     {% endif %}
-                </h4>
-            </td>
-                <td class="align-middle"><a href="add_to_basket/{{product[0]}}" class="btn btn-success pull-left">Add to Basket</a></td>
+                </td>
+                <td style="padding-top: 30px;">
+                    <a class="btn btn-primary" href="/add_to_basket/{{ product[0] }}">Add to Cart</a>
+                </td>
+
             </tr>
         {% endfor %}
     </table>

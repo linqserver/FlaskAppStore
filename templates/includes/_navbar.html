@@ -19,13 +19,25 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if session.logged_in %}
                     {% if session['username'] == "admin" %}
-                        <li><a href="/dashboard">{{ session.username }}'s Dashboard</a></li>
-                    {% else %}
-                        <li><a href="/basket.html">
+                        <li>
+                            <a href="/basket.html">
                                 <img style="margin-top: -10px;margin-bottom: -10px;" border="0" alt="Basket"
-                                     src={{ url_for('static', filename = basketStatus) }} width="40"
-                                     height="40"><img></a></li>
+                                     src={{ url_for('static', filename = basketStatus.icon) }} width="40"
+                                     height="40">
+                                <img>
+                            </a>
+                        </li>
+                        <li><a style="color: red;" href="/dashboard">{{ session.username }}'s Dashboard</a></li>
 
+                    {% else %}
+                        <li>
+                            <a href="/basket.html">
+                                <img style="margin-top: -10px;margin-bottom: -10px;" border="0" alt="Basket"
+                                     src={{ url_for('static', filename = basketStatus.icon) }} width="40"
+                                     height="40">
+                                <img>
+                            </a>
+                        </li>
                         <li>
                             <a href="/user">{{ session.username }}'s Account</a>
                         </li>

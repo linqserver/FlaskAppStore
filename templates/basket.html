@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>Basket</h1>
+    <h1>Shopping Cart</h1>
 
     <hr>
 
@@ -14,52 +14,49 @@
         </tr>
         {% for product in products %} <!--[0]prod_id ,[1]prod_name, [2]qty, [3]prod_price-->
             <tr>
-                <td >
-                    <h4><a href="product/{{product[1]}}" >{{product[1]}}</a></h4>
+                <td>
+                    <h4><a href="product/{{ product[0] }}">{{ product[1] }}</a></h4>
                 </td>
                 <td>
-                    <h4 id="price">&#8364; {{product[3]}}</h4>
+                    <h4 id="price">&#8364; {{ '%0.2f'| format(product[3]|float) }}</h4>
                 </td>
                 <td>
                     <div style="min-width: 110px;max-width: 140px; display: inline-flex">
-                       <!-- minus -->
-                        <form action="{{url_for('delete_product', id=product.id)}}" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="-" class="btn btn-default">
-                        </form>
+                        <!-- minus -->
+                        <a class="btn btn-default" href="/decrease_from_basket/{{product[0]}}/{{product[2]}}">-</a>
 
                         <!-- quantity -->
-                        <input  class="form-control text-center" maxlength="2" value={{product[2]}}>
+                        <input class="form-control text-center" maxlength="2" value={{ product[2] }}>
 
                         <!-- plus -->
-                         <form action="{{url_for('delete_product', id=product.id)}}" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="+" class="btn btn-default">
-                        </form>
+                         <a class="btn btn-default" href="/increase_item_quantity/{{product[0]}}/{{product[2]}}">+</a>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <form action="{{url_for('delete_product', id=product.id)}}" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="submit" value="Delete" class="btn btn-danger ">
-                        </form>
+                        <a class="btn btn-warning" href="/delete_from_basket/{{product[0]}}">Delete</a>
                     </div>
                 </td>
             </tr>
         {% endfor %}
         <tr>
-            <td style="text-align: right"><h4>Total: &#8364;</h4></td>
-            <td><h4 id="total">0</h4></td>
-            <td></td>
-            <td><a class="btn btn-danger btn" href="/empty_basket"> Empty Basket</a></td>
+            <td colspan="2" style="text-align: right;">
+               <h3 style="margin-top: 5px;margin-right: 70px;">
+                   Total: &#8364;
+                    {{ '%0.2f'| format(basketStatus.totalValue|float) }}
+               </h3>
+            </td>
 
+            <td>
+                <a class="btn btn-primary btn-lg" href="/empty_basket" > CHECKOUT</a>
+            </td>
+            <td>
+                <a class="btn btn-danger btn-lg" href="/empty_the_basket"> Empty Basket</a>
+            </td>
         </tr>
-    </table>
-    <div style="text-align: left;padding-left: 200px;">
 
-        <a class="btn btn-success btn-lg" href="/empty_basket"> CHECKOUT</a>
-    </div>
+    </table>
+
 
 
 {% endblock %}

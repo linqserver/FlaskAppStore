@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54333378-4e28-4906-961b-7dfaa8cf55b9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/basket_icon_full.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/images/basket_icon_full2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/DATABASE/storeDatabase2.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Product.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/basket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/addtobasket.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/images/basket_icon.png" afterPath="$PROJECT_DIR$/static/images/basket_icon.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DATABASE/storeDatabase.sql" afterPath="$PROJECT_DIR$/DATABASE/storeDatabase.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlaskAppStore.py" afterPath="$PROJECT_DIR$/FlaskAppStore.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/add_product.html" afterPath="$PROJECT_DIR$/templates/add_product.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/basket.html" afterPath="$PROJECT_DIR$/templates/basket.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_messages.html" afterPath="$PROJECT_DIR$/templates/includes/_messages.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/includes/_navbar.html" afterPath="$PROJECT_DIR$/templates/includes/_navbar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/layout.html" afterPath="$PROJECT_DIR$/templates/layout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/product.html" afterPath="$PROJECT_DIR$/templates/product.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/products.html" afterPath="$PROJECT_DIR$/templates/products.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +28,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/FlaskAppStore$FlaskAppStore.coverage" NAME="FlaskAppStore Coverage Results" MODIFIED="1511654656928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/FlaskAppStore$FlaskAppStore.coverage" NAME="FlaskAppStore Coverage Results" MODIFIED="1511751060248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,25 +42,23 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43905637">
+    <splitter split-orientation="horizontal" split-proportion="0.25482833">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="FlaskAppStore.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/FlaskAppStore.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="40" column="19" lean-forward="false" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+                <state relative-caret-position="674">
+                  <caret line="332" column="25" lean-forward="false" selection-start-line="332" selection-start-column="25" selection-end-line="332" selection-end-column="25" />
                   <folding>
-                    <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-                    <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-                    <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-                    <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-                    <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-                    <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-                    <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-                    <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-                    <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-                    <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+                    <element signature="e#0#99#0" expanded="true" />
+                    <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+                    <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+                    <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+                    <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+                    <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+                    <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+                    <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
                   </folding>
                 </state>
               </provider>
@@ -62,8 +67,28 @@
           <file leaf-file-name="add_product.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/add_product.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
-                  <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+                <state relative-caret-position="306">
+                  <caret line="17" column="55" lean-forward="false" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="_formhelpers.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/includes/_formhelpers.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="162">
+                  <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="basket.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/basket.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="594">
+                  <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
                   <folding />
                 </state>
               </provider>
@@ -72,28 +97,50 @@
           <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/layout.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+                <state relative-caret-position="324">
+                  <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="_messages.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/includes/_messages.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="162">
+                  <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="storeDatabase.sql" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/DATABASE/storeDatabase.sql">
+          <file leaf-file-name="about.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/about.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2178">
-                  <caret line="121" column="14" lean-forward="false" selection-start-line="121" selection-start-column="14" selection-end-line="121" selection-end-column="14" />
+                <state relative-caret-position="216">
+                  <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="products.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/products.html">
+          <file leaf-file-name="Product.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Product.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="558">
-                  <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="79" />
+                <state relative-caret-position="162">
+                  <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="addtobasket.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/addtobasket.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="54">
+                  <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -103,11 +150,41 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="basket.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/basket.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="900">
+                  <caret line="50" column="71" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="product.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/product.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="36">
-                  <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                <state relative-caret-position="378">
+                  <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/home.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="162">
+                  <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="63" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="products.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/products.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="414">
+                  <caret line="23" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -116,9 +193,11 @@
           <file leaf-file-name="_navbar.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="432">
-                  <caret line="24" column="80" lean-forward="false" selection-start-line="24" selection-start-column="80" selection-end-line="24" selection-end-column="80" />
-                  <folding />
+                <state relative-caret-position="504">
+                  <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+                  <folding>
+                    <element signature="n#style#0;n#a#0;n#li#1;n#ul#1;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -131,8 +210,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -150,11 +229,21 @@
       <find>basket_table.user_name</find>
       <find>check_basket_status</find>
       <find>basketVariable</find>
+      <find>basketStatus=basketVariable</find>
+      <find>basketStatus=[basketVariable]</find>
+      <find>`, `</find>
+      <find>DELETE</find>
+      <find>reg</find>
+      <find>regist</find>
+      <find>add_to_basket</find>
+      <find>ProductForm</find>
     </findStrings>
     <replaceStrings>
       <replace>conn</replace>
       <replace>product</replace>
       <replace>update_date</replace>
+      <replace>basketStatus=[basketVariable]</replace>
+      <replace>basketStatus=basketVariable</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -174,18 +263,24 @@
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/register.html" />
         <option value="$PROJECT_DIR$/templates/edit_product.html" />
-        <option value="$PROJECT_DIR$/templates/add_product.html" />
         <option value="$PROJECT_DIR$/data.py" />
         <option value="$PROJECT_DIR$/templates/about.html" />
         <option value="$PROJECT_DIR$/templates/basket.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/templates/dashboard.html" />
+        <option value="$PROJECT_DIR$/Product.py" />
+        <option value="$PROJECT_DIR$/addtobasket.html" />
+        <option value="$PROJECT_DIR$/views.py" />
+        <option value="$PROJECT_DIR$/templates/addtobasket.html" />
+        <option value="$PROJECT_DIR$/templates/product.html" />
+        <option value="$PROJECT_DIR$/templates/includes/_messages.html" />
+        <option value="$PROJECT_DIR$/basket.py" />
         <option value="$PROJECT_DIR$/templates/basket.html" />
         <option value="$PROJECT_DIR$/templates/products.html" />
-        <option value="$PROJECT_DIR$/templates/product.html" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
-        <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
+        <option value="$PROJECT_DIR$/templates/add_product.html" />
         <option value="$PROJECT_DIR$/FlaskAppStore.py" />
+        <option value="$PROJECT_DIR$/templates/includes/_navbar.html" />
       </list>
     </option>
   </component>
@@ -196,8 +291,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1280" />
-    <option name="height" value="1416" />
+    <option name="width" value="2560" />
+    <option name="height" value="1410" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -238,19 +333,6 @@
             <path>
               <item name="FlaskAppStore" type="b2602c69:ProjectViewProjectNode" />
               <item name="FlaskAppStore" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FlaskAppStore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FlaskAppStore" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-              <item name="products" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FlaskAppStore" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FlaskAppStore" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -274,6 +356,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/ubermelon-shopping-app-master" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -309,6 +397,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -360,24 +451,30 @@
       <option name="project" value="LOCAL" />
       <updated>1511580550737</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Basket icon change,what a nightmare it was&#10;mysql Connection closing at each route.&#10;schema bkp">
+      <created>1511656441341</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1511656441341</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="2560" height="1416" extended-state="6" />
+    <frame x="0" y="0" width="2560" height="1410" extended-state="6" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35379893" sideWeight="0.29388714" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19816373" sideWeight="0.70611286" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33054075" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19878142" sideWeight="0.70611286" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16015625" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1029" y="186" width="334" height="1048" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10585938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50266564" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33664882" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -385,6 +482,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32874617" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977912" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -394,18 +492,19 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35379893" sideWeight="0.29388714" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20260936" sideWeight="0.70611286" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33054075" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19816373" sideWeight="0.70611286" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17554858" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32874617" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977912" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12382813" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1029" y="186" width="334" height="1048" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50114244" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5814843" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -445,62 +544,40 @@
     <MESSAGE value="add product works" />
     <MESSAGE value="Products, product displays." />
     <MESSAGE value="Basket wip" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basket wip" />
+    <MESSAGE value="Basket icon change,what a nightmare it was&#10;mysql Connection closing at each route.&#10;schema bkp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basket icon change,what a nightmare it was&#10;mysql Connection closing at each route.&#10;schema bkp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FlaskAppStore.py</url>
+          <line>235</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/FlaskAppStore.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="jinja2-line">
+          <url>file://$PROJECT_DIR$/templates/products.html</url>
+          <line>24</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_messages.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="14" lean-forward="false" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FlaskAppStore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_formhelpers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -534,16 +611,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+            <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+            <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -581,16 +656,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+            <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+            <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -628,16 +701,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+            <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+            <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -661,16 +732,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+            <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+            <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -684,49 +753,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_messages.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="14" lean-forward="false" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_formhelpers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data.py" />
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/http/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="418" column="0" lean-forward="false" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/socketserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="239" column="0" lean-forward="false" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/werkzeug/serving.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="239" column="0" lean-forward="false" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/werkzeug/debug/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
@@ -735,20 +762,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/basket.py" />
-    <entry file="file://$PROJECT_DIR$/templates/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/edit_product.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -760,13 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -784,84 +790,186 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="15" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/basket.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DATABASE/storeDatabase.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2178">
           <caret line="121" column="14" lean-forward="false" selection-start-line="121" selection-start-column="14" selection-end-line="121" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views.py" />
+    <entry file="file://$PROJECT_DIR$/templates/register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/jinja2/runtime.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/http/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="418" column="0" lean-forward="false" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/werkzeug/serving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="239" column="0" lean-forward="false" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/socketserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="235" column="0" lean-forward="false" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/products.html">
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="79" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="79" />
+        <state relative-caret-position="234">
+          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/addtobasket.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/product.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state relative-caret-position="378">
+          <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/add_product.html">
+    <entry file="file://$PROJECT_DIR$/templates/basket.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        <state relative-caret-position="900">
+          <caret line="50" column="71" lean-forward="false" selection-start-line="50" selection-start-column="71" selection-end-line="50" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state relative-caret-position="324">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_formhelpers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
+    <entry file="file://$PROJECT_DIR$/templates/includes/_messages.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="80" lean-forward="false" selection-start-line="24" selection-start-column="80" selection-end-line="24" selection-end-column="80" />
+        <state relative-caret-position="162">
+          <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/add_product.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="55" lean-forward="false" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/products.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FlaskAppStore.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="40" column="19" lean-forward="false" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+        <state relative-caret-position="674">
+          <caret line="332" column="25" lean-forward="false" selection-start-line="332" selection-start-column="25" selection-end-line="332" selection-end-column="25" />
           <folding>
-            <marker date="1511656224393" expanded="true" signature="2431:2445" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="2431:2478" ph="SELECT * FRO... basket" />
-            <marker date="1511656224393" expanded="true" signature="3401:3423" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="3922:3963" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="5706:5745" ph="SELECT * FRO... users" />
-            <marker date="1511656224393" expanded="true" signature="7704:7726" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="8415:8489" ph="INSERT INTO products... " />
-            <marker date="1511656224393" expanded="true" signature="9052:9093" ph="SELECT * FRO... products" />
-            <marker date="1511656224393" expanded="true" signature="9563:9617" ph="UPDATE produ... " />
-            <marker date="1511656224393" expanded="true" signature="10150:10189" ph="DELETE FROM " />
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1511750638511" expanded="true" signature="1398:1420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="1837:1878" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="3622:3661" ph="SELECT * FRO... users" />
+            <marker date="1511750638511" expanded="true" signature="9015:9037" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10379:10420" ph="SELECT * FRO... products" />
+            <marker date="1511750638511" expanded="true" signature="10911:10965" ph="UPDATE produ... " />
+            <marker date="1511750638511" expanded="true" signature="11494:11533" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#1;n#div#1;n#div#0;n#nav#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -4,18 +4,15 @@
     <meta charset="utf-8">
     <title>MyFlaskApp</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 {% include 'includes/_navbar.html' %}
+<div class="container" style="height: 30px; margin-top: -17px;margin-bottom: 5px;" > {% include 'includes/_messages.html' %}</div>
 <div class="container">
-    {% include 'includes/_messages.html' %}
-    {% block body %}{% endblock %}
+
+    {% block body %}
+    {% endblock %}
 </div>
-
-
 </body>
 </html>
