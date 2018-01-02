@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <h1>Shopping Cart</h1>
+    <h1>Fast Checkout</h1>
 
     <hr>
 
@@ -21,21 +21,16 @@
                     <h4 id="price">&#8364; {{ '%0.2f'| format(product[3]|float) }}</h4>
                 </td>
                 <td>
-                    <div style="min-width: 110px;max-width: 140px; display: inline-flex">
-                        <!-- minus -->
-                        <a class="btn btn-default" href="/decrease_from_basket/{{product[0]}}/{{product[2]}}">-</a>
+                    <div style="text-align: center;">
 
                         <!-- quantity -->
-                        <input class="form-control text-center" maxlength="2" value={{ product[2] }}>
+                        {{ product[2] }}
 
-                        <!-- plus -->
-                         <a class="btn btn-default" href="/increase_item_quantity/{{product[0]}}/{{product[2]}}">+</a>
+
                     </div>
                 </td>
                 <td>
-                    <div>
-                        <a class="btn btn-warning" href="/delete_from_basket/{{product[0]}}">Delete</a>
-                    </div>
+
                 </td>
             </tr>
         {% endfor %}
@@ -48,10 +43,10 @@
             </td>
 
             <td>
-                <a class="btn btn-primary btn-lg" href="/checkout" > CHECKOUT</a>
+                <a class="btn btn-primary btn-lg" href="/confirm_order" >Confirm Order</a>
             </td>
             <td>
-                <a class="btn btn-danger btn-lg" href="/empty_the_basket"> Empty Basket</a>
+                <a class="btn btn-danger btn-lg" href="/empty_the_basket"> Cancel Order</a>
             </td>
         </tr>
 

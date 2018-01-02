@@ -1,13 +1,35 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div class="jumbotron text-center">
-    <h1>Welcome To Rafal' Store</h1>
-    <p class="lead">This application is built on the Python Flask framework for Databases 4 Project</p>
+
+    <style>
+        #logos {
+
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+    <div class="jumbotron text-center">
+        <h1>Welcome To Rafal' Store</h1>
+        <p class="lead">This application is built on the Python Flask framework for Databases 4 Project</p>
         <a href="/products" class="btn btn-info btn-lg">See our Products</a>
-    {% if session.logged_in == NULL %}
-      <a href="/register" class="btn btn-primary btn-lg">Register</a>
-      <a href="/login" class="btn btn-success btn-lg">Login</a>
-    {% endif %}
-  </div>
+        {% if session.logged_in == NULL %}
+            <a href="/register" class="btn btn-primary btn-lg">Register</a>
+            <a href="/login" class="btn btn-success btn-lg">Login</a>
+        {% endif %}
+    </div>
+
+
+    <div style="text-align:center; margin-bottom: 20px;">
+        <img id="logos" src={{ url_for('static', filename = 'images/ksp_logo.png') }} alt="Logo" height="80">
+        <img id="logos" src={{ url_for('static', filename = 'images/novapunchlogo.png') }} alt="Logo" height="80">
+        <img id="logos" src={{ url_for('static', filename = 'images/Icarus_logo1.png') }} alt="Logo" height="70">
+    </div>
+
+
+    <div style="text-align: center; ">
+        <img id="logos" src={{ url_for('static', filename = 'images/kspxlogo.jpg') }} alt="Logo" height="80">
+        <img id="logos" src={{ url_for('static', filename = 'images/keridianlogo.png') }} alt="Logo" height="80">
+        <img id="logos" src={{ url_for('static', filename = 'images/space.jpg') }} alt="Logo" height="80">
+    </div>
 {% endblock %}

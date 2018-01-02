@@ -31,7 +31,9 @@
                           &#8364; {{product[2]}}
                      </h3>
                      <h3>
-                        <a class="btn btn-primary" href="/add_to_basket/{{product[0]}}">Add to Cart</a>
+                        {% if session.logged_in %}
+                    <a class="btn btn-primary" href="/add_to_basket/{{ product[0] }}">Add to Cart</a>
+                    {% endif %}
                      </h3>
                 </td>
             </tr>

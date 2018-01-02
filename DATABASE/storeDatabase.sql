@@ -30,7 +30,7 @@ CREATE TABLE `basket_table` (
   `qty` int(11) DEFAULT NULL,
   `user_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9048 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9065 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,8 +39,62 @@ CREATE TABLE `basket_table` (
 
 LOCK TABLES `basket_table` WRITE;
 /*!40000 ALTER TABLE `basket_table` DISABLE KEYS */;
-INSERT INTO `basket_table` VALUES (9002,4,1,'admin2'),(9003,5,3,'admin2'),(9045,2,4,'helloworld'),(9046,3,2,'helloworld'),(9047,4,10,'helloworld');
+INSERT INTO `basket_table` VALUES (9002,4,1,'admin2'),(9003,5,3,'admin2'),(9055,1,1,'rafal'),(9063,1,1,'helloworld'),(9064,1,1,'admin');
 /*!40000 ALTER TABLE `basket_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_item`
+--
+
+DROP TABLE IF EXISTS `order_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_item` (
+  `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_price` decimal(8,2) DEFAULT NULL,
+  `quantity` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`product_id`,`order_id`),
+  KEY `order_id_FK_idx` (`order_id`),
+  CONSTRAINT `order_id_FK` FOREIGN KEY (`order_id`) REFERENCES `order_table` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_id_FK` FOREIGN KEY (`product_id`) REFERENCES `products` (`prod_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_item`
+--
+
+LOCK TABLES `order_item` WRITE;
+/*!40000 ALTER TABLE `order_item` DISABLE KEYS */;
+INSERT INTO `order_item` VALUES (1,500505,10000.00,'1');
+/*!40000 ALTER TABLE `order_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_table`
+--
+
+DROP TABLE IF EXISTS `order_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_table` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_user_id` int(11) DEFAULT NULL,
+  `order_date_created` datetime DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=500506 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_table`
+--
+
+LOCK TABLES `order_table` WRITE;
+/*!40000 ALTER TABLE `order_table` DISABLE KEYS */;
+INSERT INTO `order_table` VALUES (500504,1004,'2018-01-02 22:23:40'),(500505,1004,'2018-01-02 23:27:43');
+/*!40000 ALTER TABLE `order_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -56,7 +110,7 @@ CREATE TABLE `products` (
   `prod_price` decimal(8,2) DEFAULT NULL,
   `prod_stock` int(11) DEFAULT NULL,
   `prod_image_ref` varchar(255) DEFAULT 'images/products/product_1.jpg',
-  `prod_description` varchar(510) DEFAULT 'def description',
+  `prod_description` text,
   PRIMARY KEY (`prod_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +121,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Product 1',100.00,999,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(2,'Product 2',200.00,777,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(3,'Product 3',999.22,8,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(4,'Product 4',123.00,5,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(5,'Product 5',897.00,123,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(6,'Product 6',548.25,6,'images/products/product_1.jpg','a symbol used in a logical or mathematical expression to represent another term or quantity that is not yet specified but may occupy that place later'),(7,'Product Admin',12.58,11,'\'images/products/product_1.jpg\'','Default');
+INSERT INTO `products` VALUES (1,'Atomic Rocket Motor',10000.00,12,'images/products/prod_1.png','Despite the big scary trefoil painted onto the side of this engine, its radioactive exhaust, and tendency to overheat, the LV-N Atomic Rocket Motor is harmless. Mostly. Note that the LV-N is the only LV series engine to run solely on Liquid Fuel - the future is glowing bright!  The LV-N \"Nerv\" Atomic Rocket Motor is a low-thrust, high-efficiency rocket engine. It is modeled after the real-world theoretical nuclear thermal rocket, which uses a fission reactor to heat its propellant and force it out of the rocket nozzle to generate thrust (as opposed to a normal rocket, which ignites the propellant and uses the energy released by the resulting chemical reaction for that purpose).'),(2,'MonoPropelant Engine',1500.00,200,'images/products/prod_2.png','When The O-10 Engine was first unveiled, it was regarded as one of those ideas that someone should have thought of a long time ago. This made most employees at Reaction Systems Ltd feel quite awkward, as they were particularly proud of having delivered this project on schedule for once. This Engine responds to main throttle controls, but it consumes MonoPropellant instead of a Fuel+Oxidizer mix.'),(3,'Vernor Engine',1450.00,16,'images/products/prod_3.png','The VR-N1ER Veer-Governor, or \"Vernor\" Engine is an attitude control thruster. These motors are linked to RCS controls, but are powered by a Fuel+Oxidizer mix, making them significantly more powerful than MonoPropellant-powered RCS thrusters. They are fairly more bulky in comparison though, and feature only one nozzle facing outwards, although most agree that is an acceptable trade-off for the additional punch they pack.'),(4,'Twitch Radaial Engine',400.00,100,'images/products/prod_4.png','Tiny engine! But very useful, good for craft where larger radial engines won\'t fit. Although, you may need more of them to lift larger payloads.'),(5,'Main Sail Liquid Fuel',13000.00,6,'images/products/prod_5.png','A monster of an engine for heavy lifting purposes, the Mainsail\'s power rivals that of entire small nations.  The Rockomax \"Mainsail\" Liquid Engine is one of the heaviest and most powerful large-diameter engines among the stock parts. It is usually used to provide thrust for larger rockets and lower stages. It is typically fueled by large diameter liquid fuel tanks like the Rockomax X200-32 Fuel Tank. Prior to version 0.23.5 it was the largest engine, as well as the one with the highest thrust. Those titles, however, are now held by the S3 KS-25x4 Engine Cluster.\n\n'),(6,'Ant Liquid Fuel Engine',548.25,6,'images/products/prod_6.png','The LV-1 \"Ant\" Liquid Fuel Engine is used to provide thrust to a rocket and is currently the weakest liquid fueled engine available. As of 1.0, it has extremely poor specific impulse in atmosphere, but decent specific impulse in vacuum; in combination with its low mass and tiny size, this makes it a good choice for small satellites. There is a radial derivative of this engine called LV-1R Liquid Fuel Engine featuring a similar design and vacuum thrust but very different Isp profile at a slightly higher cost.'),(7,'Swivel Liquid Fuel Engine',10100.00,11,'images/products/prod_7.png','The LV-T45 engine was considered a breakthrough in the LV-T series due to its Thrust Vectoring feature. The LV-T45 can deflect its thrust to aid in craft control. All these added mechanics however, make for a slightly smaller and heavier engine in comparison with other LV-T models. The LV-T45 is similar to the LV-T30 Liquid Fuel Engine, but with a slightly smaller thrust chamber, higher expansion ratio, and thrust vector control. Its slightly reduced thrust and considerably increased mass reduces its specific thrust, making it less suitable for first stages. It is best suited in second stages and the core stage of parallel lift-off configurations, where longer operating times and higher altitudes bring out this engine\'s advantage in specific impulse.');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,6 +153,10 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1004,'HelloWorld','helloworld','helloworld@server.com','$5$rounds=535000$pfKs/44pOmaDISME$PS/kRTTgcMPLEyu42TWZPOohmfQI7Wxq6Oc6tO5AIND','04:35:10','2017-11-20'),(1005,'Rafal Admin','admin','admin@admin.com','$5$rounds=535000$9mvf73SkteiatZsY$z6yFSSCy/bx4YAjowI9dQL0ds1WVcY9dBtbgOtM0rI6','16:17:06','2017-11-20'),(1006,'adam','admin2','adam@lol.com','$5$rounds=535000$mIsTm094pvwRobWw$Vd4luan6LRtY2957LM57vac1riNKDzCf0MAYKMjp0E9','00:47:24','2017-11-21'),(1007,'Rafal','rafal','rafal@server.com','$5$rounds=535000$qTudjV5VD04wXfwh$.rcOS1.8LYFaH8PxQJzR7/qjbsoDWhfxxkXoqK3ALu2','01:52:17','2017-11-27');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'RafalStoreDb'
+--
 
 --
 -- Dumping routines for database 'RafalStoreDb'
@@ -327,6 +385,47 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_createOrder` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createOrder`(
+IN _user VARCHAR(120)
+)
+BEGIN
+	DECLARE user_id_local INT ;
+	DECLARE order_id_local INT ;
+
+	set user_id_local = (select iduser from users where username = _user);
+
+	INSERT INTO `RafalStoreDb`.`order_table` (`order_id`,`order_user_id`, `order_date_created`) VALUES (null,user_id_local, NOW());
+	set order_id_local = LAST_INSERT_ID();
+
+	INSERT INTO `RafalStoreDb`.`order_item` (product_id,order_id,product_price,quantity)
+	SELECT DISTINCT 
+			prod_id, 
+			order_id_local, 
+			prod_price,
+            basket_table.qty
+	FROM
+		products
+	INNER JOIN
+		basket_table ON products.prod_id = basket_table.product_id
+
+	where
+		basket_table.user_name =_user;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_createUser` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -410,4 +509,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-27  2:52:56
+-- Dump completed on 2018-01-02 23:51:31

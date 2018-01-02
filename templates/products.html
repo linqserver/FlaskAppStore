@@ -5,7 +5,7 @@
     <h1>Products</h1>
 
     <hr>
-    <smal>Max order size is 10 per product.</smal>
+    <smal>Max order size is 10 per product per order.</smal>
     <table class="table table-striped ">
         <tr>
             <th >Image</th>
@@ -29,7 +29,9 @@
                     {% endif %}
                 </td>
                 <td style="padding-top: 30px;">
+                    {% if session.logged_in %}
                     <a class="btn btn-primary" href="/add_to_basket/{{ product[0] }}">Add to Cart</a>
+                    {% endif %}
                 </td>
 
             </tr>

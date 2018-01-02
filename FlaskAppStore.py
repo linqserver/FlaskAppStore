@@ -314,7 +314,31 @@ def basket():
         return render_template('basket.html', products=bskt)
     else:
         msg = 'No products Found'
-        return render_template('basket.html', msg=msg)
+        return render_template('emptybasket.html', msg=msg)
+
+
+# Checkout.html
+@app.route('/checkout', methods=['GET', 'POST'])
+@is_logged_in
+def checkout():
+    global the_rows
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+    user = session['username']
+    cur.callproc('sp_basketGetProducts', [user])
+    bskt = cur.fetchall()
+    conn.close()
+    the_rows = bskt
+    check_basket_status()
+    if bskt.__len__() > 0:
+        return render_template('checkout.html', products=bskt)
+    else:
+        msg = 'No products Found'
+        return render_template('emptybasket.html', msg=msg)
+
+
+
 
 
 # Dashboard
