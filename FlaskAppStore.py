@@ -1,7 +1,9 @@
 from flask import Flask, render_template, flash, redirect, json, url_for, session, request, logging
 from basket import Basket
 from Product import Product
-
+from wtforms.fields import StringField
+from wtforms.widgets import TextArea
+import json
 ''' *******************************************************************
     *   IF ERROR on IMPORT MySQL ext flask mysql 
     *   THEN in terminal:
@@ -204,7 +206,7 @@ class ProductForm(Form):
     price = StringField('Price')
     stock = StringField('Stock')
     image = StringField('Image', default="images/products/product_1.jpg")
-    description = StringField('Description', default="This is a description of the product")
+    description = StringField('Description', default="This is a description of the product", widget=TextArea())
 
 
 # returns true if current user have items in the basket
@@ -417,7 +419,7 @@ def add_product():
         conn = mysql.connect()
         cur = conn.cursor()
         # Execute
-        cur.callproc('p_addNewProduct', [_name, _price, _stock, _image, _descrip])
+        cur.callproc('sp_addNewProduct', [_name, _price, _stock, _image, _descrip])
         # Commit to DB
         conn.commit()
         # Close connection
@@ -428,45 +430,42 @@ def add_product():
 
 
 # Edit product
-@app.route('/edit_product/<string:id>', methods=['GET', 'POST'])
+@app.route('/edit_product/<int:idd_edit>', methods=['GET', 'POST'])
 @is_logged_in
-def edit_product(id):
+def edit_product(idd_edit):
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
-
-    # Get product by id
-    result = cur.execute("SELECT * FROM products WHERE prod_id = %s", [id])
-
+    cur.callproc('sp_get_product_by_id', [idd_edit])
     single_product = cur.fetchone()
-    cur.close()
-    # Get form
+
     form = ProductForm(request.form)
+    if request.method == 'GET':
+        form.name.data = (single_product[1])
+        form.price.data = str(single_product[2])
+        form.stock.data = str(single_product[3])
+        form.image.data = (single_product[4])
+        form.description.data = (single_product[5])
 
-    # Populate product form fields
-    form.title.data = single_product['title']
-    form.body.data = single_product['body']
-
-    if request.method == 'POST' and form.validate():
-        title = request.form['title']
-        body = request.form['body']
+    elif request.method == 'POST':
+        _name = form.name.data
+        _price = form.price.data
+        _stock = form.stock.data
+        _image = form.image.data
+        _descrip = form.description.data
 
         # Create Cursor
+        conn = mysql.connect()
         cur = conn.cursor()
-        app.logger.info(title)
         # Execute
-        cur.execute("UPDATE products SET title=%s, body=%s WHERE prod_id=%s", (title, body, id))
+        cur.callproc('sp_updateProduct', [idd_edit, _name, _price, _stock, _image, _descrip])
         # Commit to DB
         conn.commit()
-
         # Close connection
         conn.close()
-
-        flash('product Updated', 'success')
-
+        flash((single_product[1]) + ' Was Successfully Updated', 'success')
         return redirect(url_for('dashboard'))
-    conn.close()
-    return render_template('edit_product.html', form=form, basketStatus=the_basket)
+    return render_template('add_product.html', form=form, basketStatus=the_basket)
 
 
 # Delete product
@@ -489,6 +488,29 @@ def delete_product(id):
     flash('product Deleted', 'success')
 
     return redirect(url_for('dashboard'), basketStatus=the_basket)
+
+
+# work in progress
+@app.route('/wip')
+@is_logged_in
+def wip():
+    return render_template('wip.html')
+
+
+# high_charts
+@app.route('/high_charts')
+@is_logged_in
+def high_charts():
+    check_basket_status()
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+    global the_product_rows
+    cur.execute("SELECT prod_name ,prod_stock FROM products")
+    product_names = cur.fetchall()
+    conn.close()
+    json_names = json.dumps(product_names)
+    return render_template('visualization.html', products=the_product_rows, names=json_names)
 
 
 app.jinja_env.globals.update(basketStatus=the_basket)

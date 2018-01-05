@@ -30,7 +30,7 @@ CREATE TABLE `basket_table` (
   `qty` int(11) DEFAULT NULL,
   `user_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9170 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9057 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `basket_table` (
 
 LOCK TABLES `basket_table` WRITE;
 /*!40000 ALTER TABLE `basket_table` DISABLE KEYS */;
-INSERT INTO `basket_table` VALUES (9002,4,1,'admin2'),(9003,5,3,'admin2'),(9055,1,1,'rafal');
+INSERT INTO `basket_table` VALUES (9002,4,1,'admin2'),(9003,5,3,'admin2'),(9055,1,1,'rafal'),(9056,1,2,'helloworld');
 /*!40000 ALTER TABLE `basket_table` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -164,7 +164,7 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `prod_id` int(11) NOT NULL AUTO_INCREMENT,
   `prod_name` text,
-  `prod_price` decimal(8,2) DEFAULT NULL,
+  `prod_price` float DEFAULT NULL,
   `prod_stock` int(11) DEFAULT NULL,
   `prod_image_ref` varchar(255) DEFAULT 'images/products/product_1.jpg',
   `prod_description` text,
@@ -178,7 +178,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Atomic Rocket Motor',10000.00,1,'images/products/prod_1.png','Despite the big scary trefoil painted onto the side of this engine, its radioactive exhaust, and tendency to overheat, the LV-N Atomic Rocket Motor is harmless. Mostly. Note that the LV-N is the only LV series engine to run solely on Liquid Fuel - the future is glowing bright!  The LV-N \"Nerv\" Atomic Rocket Motor is a low-thrust, high-efficiency rocket engine. It is modeled after the real-world theoretical nuclear thermal rocket, which uses a fission reactor to heat its propellant and force it out of the rocket nozzle to generate thrust (as opposed to a normal rocket, which ignites the propellant and uses the energy released by the resulting chemical reaction for that purpose).'),(2,'MonoPropelant Engine',1500.00,5,'images/products/prod_2.png','When The O-10 Engine was first unveiled, it was regarded as one of those ideas that someone should have thought of a long time ago. This made most employees at Reaction Systems Ltd feel quite awkward, as they were particularly proud of having delivered this project on schedule for once. This Engine responds to main throttle controls, but it consumes MonoPropellant instead of a Fuel+Oxidizer mix.'),(3,'Vernor Engine',1450.00,3,'images/products/prod_3.png','The VR-N1ER Veer-Governor, or \"Vernor\" Engine is an attitude control thruster. These motors are linked to RCS controls, but are powered by a Fuel+Oxidizer mix, making them significantly more powerful than MonoPropellant-powered RCS thrusters. They are fairly more bulky in comparison though, and feature only one nozzle facing outwards, although most agree that is an acceptable trade-off for the additional punch they pack.'),(4,'Twitch Radaial Engine',400.00,3,'images/products/prod_4.png','Tiny engine! But very useful, good for craft where larger radial engines won\'t fit. Although, you may need more of them to lift larger payloads.'),(5,'Main Sail Liquid Fuel',13000.00,0,'images/products/prod_5.png','A monster of an engine for heavy lifting purposes, the Mainsail\'s power rivals that of entire small nations.  The Rockomax \"Mainsail\" Liquid Engine is one of the heaviest and most powerful large-diameter engines among the stock parts. It is usually used to provide thrust for larger rockets and lower stages. It is typically fueled by large diameter liquid fuel tanks like the Rockomax X200-32 Fuel Tank. Prior to version 0.23.5 it was the largest engine, as well as the one with the highest thrust. Those titles, however, are now held by the S3 KS-25x4 Engine Cluster.\n\n'),(6,'Ant Liquid Fuel Engine',548.25,3,'images/products/prod_6.png','The LV-1 \"Ant\" Liquid Fuel Engine is used to provide thrust to a rocket and is currently the weakest liquid fueled engine available. As of 1.0, it has extremely poor specific impulse in atmosphere, but decent specific impulse in vacuum; in combination with its low mass and tiny size, this makes it a good choice for small satellites. There is a radial derivative of this engine called LV-1R Liquid Fuel Engine featuring a similar design and vacuum thrust but very different Isp profile at a slightly higher cost.'),(7,'Swivel Liquid Fuel Engine',10100.00,2,'images/products/prod_7.png','The LV-T45 engine was considered a breakthrough in the LV-T series due to its Thrust Vectoring feature. The LV-T45 can deflect its thrust to aid in craft control. All these added mechanics however, make for a slightly smaller and heavier engine in comparison with other LV-T models. The LV-T45 is similar to the LV-T30 Liquid Fuel Engine, but with a slightly smaller thrust chamber, higher expansion ratio, and thrust vector control. Its slightly reduced thrust and considerably increased mass reduces its specific thrust, making it less suitable for first stages. It is best suited in second stages and the core stage of parallel lift-off configurations, where longer operating times and higher altitudes bring out this engine\'s advantage in specific impulse.');
+INSERT INTO `products` VALUES (1,'Atomic Rocket Motor',10000,29,'images/products/prod_1.png','Despite the big scary trefoil painted onto the side of this engine, its radioactive exhaust, and tendency to overheat, the LV-N Atomic Rocket Motor is harmless. Mostly. Note that the LV-N is the only LV series engine to run solely on Liquid Fuel - the future is glowing bright!  The LV-N \\\"Nerv\\\" Atomic Rocket Motor is a low-thrust, high-efficiency rocket engine. It is modeled after the real-world theoretical nuclear thermal rocket, which uses a fission reactor to heat its propellant and force it out of the rocket nozzle to generate thrust (as opposed to a normal rocket, which ignites the propellant and uses the energy released by the resulting chemical reaction for that purpose).\'),(2,\'MonoPropelant Engine\',1500.00,5,\'images/products/prod_2.png\',\'When The O-10 Engine was first unveiled, it was regarded as one of those ideas that someone should have thought of a long time ago. This made most employees at Reaction Systems Ltd feel quite awkward, as they were particularly proud of having delivered this project on schedule for once. This Engine responds to main throttle controls, but it consumes MonoPropellant instead of a Fuel+Oxidizer mix.\'),(3,\'Vernor Engine\',1450.00,3,\'images/products/prod_3.png\',\'The VR-N1ER Veer-Governor, or \\\"Vernor\\\" Engine is an attitude control thruster. These motors are linked to RCS controls, but are powered by a Fuel+Oxidizer mix, making them significantly more powerful than MonoPropellant-powered RCS thrusters. They are fairly more bulky in comparison though, and feature only one nozzle facing outwards, although most agree that is an acceptable trade-off for the additional punch they pack.\'),(4,\'Twitch Radaial Engine\',400.00,3,\'images/products/prod_4.png\',\'Tiny engine! But very useful, good for craft where larger radial engines won\\\'t fit. Although, you may need more of them to lift larger payloads.\'),(5,\'Main Sail Liquid Fuel\',13000.00,0,\'images/products/prod_5.png\',\'A monster of an engine for heavy lifting purposes, the Mainsail\\\'s power rivals that of entire small nations.  The Rockomax \\\"Mainsail\\\" Liquid Engine is one of the heaviest and most powerful large-diameter engines among the stock parts. It is usually used to provide thrust for larger rockets and lower stages. It is typically fueled by large diameter liquid fuel tanks like the Rockomax X200-32 Fuel Tank. Prior to version 0.23.5 it was the largest engine, as well as the one with the highest thrust. Those titles, however, are now held by the S3 KS-25x4 Engine Cluster.\\n\\n\'),(6,\'Ant Liquid Fuel Engine\',548.25,3,\'images/products/prod_6.png\',\'The LV-1 \\\"Ant\\\" Liquid Fuel Engine is used to provide thrust to a rocket and is currently the weakest liquid fueled engine available. As of 1.0, it has extremely poor specific impulse in atmosphere, but decent specific impulse in vacuum; in combination with its low mass and tiny size, this makes it a good choice for small satellites. There is a radial derivative of this engine called LV-1R Liquid Fuel Engine featuring a similar design and vacuum thrust but very different Isp profile at a slightly higher cost.\'),(7,\'Swivel Liquid Fuel Engine\',10100.00,2,\'images/products/prod_7.png\',\'The LV-T45 engine was considered a breakthrough in the LV-T series due to its Thrust Vectoring feature. The LV-T45 can deflect its thrust to aid in craft control. All these added mechanics however, make for a slightly smaller and heavier engine in comparison with other LV-T models. The LV-T45 is similar to the LV-T30 Liquid Fuel Engine, but with a slightly smaller thrust chamber, higher expansion ratio, and thrust vector control. Its slightly reduced thrust and considerably increased mass reduces its specific thrust, making it less suitable for first stages. It is best suited in second stages and the core stage of parallel lift-off configurations, where longer operating times and higher altitudes bring out this engine\\\'s advantage in specific impulse.'),(2,'MonoPropelant Engine',1500,5,'images/products/prod_2.png','When The O-10 Engine was first unveiled, it was regarded as one of those ideas that someone should have thought of a long time ago. This made most employees at Reaction Systems Ltd feel quite awkward, as they were particularly proud of having delivered this project on schedule for once. This Engine responds to main throttle controls, but it consumes MonoPropellant instead of a Fuel+Oxidizer mix.'),(3,'Vernor Engine',1450,3,'images/products/prod_3.png','The VR-N1ER Veer-Governor, or \"Vernor\" Engine is an attitude control thruster. These motors are linked to RCS controls, but are powered by a Fuel+Oxidizer mix, making them significantly more powerful than MonoPropellant-powered RCS thrusters. They are fairly more bulky in comparison though, and feature only one nozzle facing outwards, although most agree that is an acceptable trade-off for the additional punch they pack.'),(4,'Twitch Radaial Engine',400,7,'images/products/prod_4.png','Tiny engine! But very useful, good for craft where larger radial engines won\'t fit. Although, you may need more of them to lift larger payloads.'),(5,'Main Sail Liquid Fuel',13000,20,'images/products/prod_5.png','A monster of an engine for heavy lifting purposes, the Mainsail\'s power rivals that of entire small nations.  The Rockomax \"Mainsail\" Liquid Engine is one of the heaviest and most powerful large-diameter engines among the stock parts. It is usually used to provide thrust for larger rockets and lower stages. It is typically fueled by large diameter liquid fuel tanks like the Rockomax X200-32 Fuel Tank. Prior to version 0.23.5 it was the largest engine, as well as the one with the highest thrust. Those titles, however, are now held by the S3 KS-25x4 Engine Cluster.\r\n\r\n'),(6,'Ant Liquid Fuel Engine',548.25,3,'images/products/prod_6.png','The LV-1 \"Ant\" Liquid Fuel Engine is used to provide thrust to a rocket and is currently the weakest liquid fueled engine available. As of 1.0, it has extremely poor specific impulse in atmosphere, but decent specific impulse in vacuum; in combination with its low mass and tiny size, this makes it a good choice for small satellites. There is a radial derivative of this engine called LV-1R Liquid Fuel Engine featuring a similar design and vacuum thrust but very different Isp profile at a slightly higher cost.'),(7,'Swivel Liquid Fuel Engine',10100,6,'images/products/prod_7.png','The LV-T45 engine was considered a breakthrough in the LV-T series due to its Thrust Vectoring feature. The LV-T45 can deflect its thrust to aid in craft control. All these added mechanics however, make for a slightly smaller and heavier engine in comparison with other LV-T models. The LV-T45 is similar to the LV-T30 Liquid Fuel Engine, but with a slightly smaller thrust chamber, higher expansion ratio, and thrust vector control. Its slightly reduced thrust and considerably increased mass reduces its specific thrust, making it less suitable for first stages. It is best suited in second stages and the core stage of parallel lift-off configurations, where longer operating times and higher altitudes bring out this engine\'s advantage in specific impulse.');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -229,7 +229,7 @@ CREATE TABLE `stock_table` (
 
 LOCK TABLES `stock_table` WRITE;
 /*!40000 ALTER TABLE `stock_table` DISABLE KEYS */;
-INSERT INTO `stock_table` VALUES (1,1,0),(2,5,1),(3,3,0),(4,3,0),(5,0,4),(6,3,0),(7,2,0);
+INSERT INTO `stock_table` VALUES (1,29,0),(2,5,1),(3,3,0),(4,7,0),(5,20,4),(6,3,0),(7,6,0);
 /*!40000 ALTER TABLE `stock_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +249,7 @@ CREATE TABLE `users` (
   `time_joined` time DEFAULT NULL,
   `date_joined` date DEFAULT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=1008 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1009 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1004,'HelloWorld','helloworld','helloworld@server.com','$5$rounds=535000$pfKs/44pOmaDISME$PS/kRTTgcMPLEyu42TWZPOohmfQI7Wxq6Oc6tO5AIND','04:35:10','2017-11-20'),(1005,'Rafal Admin','admin','admin@admin.com','$5$rounds=535000$9mvf73SkteiatZsY$z6yFSSCy/bx4YAjowI9dQL0ds1WVcY9dBtbgOtM0rI6','16:17:06','2017-11-20'),(1006,'adam','admin2','adam@lol.com','$5$rounds=535000$mIsTm094pvwRobWw$Vd4luan6LRtY2957LM57vac1riNKDzCf0MAYKMjp0E9','00:47:24','2017-11-21'),(1007,'Rafal','rafal','rafal@server.com','$5$rounds=535000$qTudjV5VD04wXfwh$.rcOS1.8LYFaH8PxQJzR7/qjbsoDWhfxxkXoqK3ALu2','01:52:17','2017-11-27');
+INSERT INTO `users` VALUES (1004,'HelloWorld','helloworld','helloworld@server.com','$5$rounds=535000$pfKs/44pOmaDISME$PS/kRTTgcMPLEyu42TWZPOohmfQI7Wxq6Oc6tO5AIND','04:35:10','2017-11-20'),(1005,'Rafal Admin','admin','admin@admin.com','$5$rounds=535000$9mvf73SkteiatZsY$z6yFSSCy/bx4YAjowI9dQL0ds1WVcY9dBtbgOtM0rI6','16:17:06','2017-11-20'),(1006,'adam','admin2','adam@lol.com','$5$rounds=535000$mIsTm094pvwRobWw$Vd4luan6LRtY2957LM57vac1riNKDzCf0MAYKMjp0E9','00:47:24','2017-11-21'),(1007,'Rafal','rafal','rafal@server.com','$5$rounds=535000$qTudjV5VD04wXfwh$.rcOS1.8LYFaH8PxQJzR7/qjbsoDWhfxxkXoqK3ALu2','01:52:17','2017-11-27'),(1008,'test5','test555','test@fu.com','$5$rounds=535000$o1KNjglWZI/lDvop$rrtsoDwRvcYZ9oOhDeftUSkAsL1z4m90hTOmb7uJAq4','15:02:03','2018-01-05');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -649,6 +649,28 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_get_product_by_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_product_by_id`(
+in _id int)
+BEGIN
+
+SELECT * FROM products WHERE prod_id = _id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `sp_restock_all_from_user` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -670,7 +692,46 @@ where
  `products`.`prod_id` = `basket_table`.`product_id`
 and
 `basket_table`.`user_name` = _user;
+SET SQL_SAFE_UPDATES=1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_updateProduct` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_updateProduct`(
+in idd_edit int,
+in _name varchar(120), 
+in _price decimal(8,2),
+in _stock int,
+in _image varchar(255),
+in _descrip text
+)
+BEGIN
+SET SQL_SAFE_UPDATES=0;
 
+UPDATE products
+set `prod_name` = _name,
+	`prod_price` = _price,
+    `prod_stock` = _stock,
+    `prod_image_ref` = _image,
+    `prod_description` = _descrip
+where
+ `products`.`prod_id` = idd_edit;
+
+SET SQL_SAFE_UPDATES=0;
+
+commit;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -714,4 +775,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-05  2:33:09
+-- Dump completed on 2018-01-05 17:08:47
