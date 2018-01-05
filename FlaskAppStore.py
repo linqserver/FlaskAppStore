@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, json, url_for, session, request, logging
 from basket import Basket
 from Product import Product
+
 ''' *******************************************************************
     *   IF ERROR on IMPORT MySQL ext flask mysql 
     *   THEN in terminal:
@@ -23,13 +24,15 @@ app.config['MYSQL_DATABASE_DB'] = 'RafalStoreDb'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
+# basket temp
+the_basket_rows = list()
 
-the_rows = list()
+# products temp
+the_product_rows = list()
 
 the_basket = Basket()
 the_basket.icon = 'images/basket_icon.png'
 the_basket.totalValue = 0.00
-
 
 
 # Index
@@ -49,24 +52,30 @@ def about():
 @app.route('/products')
 def products():
     check_basket_status()
-    # Create cursor
-    conn = mysql.connect()
-    cur = conn.cursor()
+    products_list_refresh()
+    global the_product_rows
 
-    result = cur.execute("SELECT * FROM products")
-    articles = cur.fetchall()
-    conn.close()
-    if result > 0:
-        return render_template('products.html', products=articles)
+    if len(the_product_rows) > 0:
+        return render_template('products.html', products=the_product_rows)
     else:
         msg = 'No products Found'
         return render_template('products.html', msg=msg)
 
 
+# products_list_refresh
+def products_list_refresh():
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+    global the_product_rows
+    cur.execute("SELECT * FROM products")
+    the_product_rows = cur.fetchall()
+    conn.close()
+
+
 # Single product
 @app.route('/product/<prodid>/')
 def product(prodid):
-
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
@@ -76,6 +85,8 @@ def product(prodid):
     conn.close()
     check_basket_status()
     return render_template('product.html', product=result)
+
+
 
 
 # Register Form Class
@@ -200,16 +211,17 @@ class ProductForm(Form):
 @is_logged_in
 def check_basket_status():
     global the_basket
-    global the_rows
-    the_basket.calcTotVal(the_rows)
+    global the_basket_rows
+    the_basket.calcTotVal(the_basket_rows)
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
     user = session['username']
     cur.callproc('sp_basketCheckForContent', [user])
     bskt = cur.fetchone()
+    products_list_refresh()
     if bskt[0] >= 1:
-        the_basket.calcTotVal(the_rows)
+        the_basket.calcTotVal(the_basket_rows)
         the_basket.icon = 'images/basket_icon_full2.png'
         msg = 'check_basket_status returns one'
         print(msg, bskt[0])
@@ -226,35 +238,43 @@ def check_basket_status():
 
 # app.jinja_env.globals.update(add_to_basket=add_to_basket)
 # add_to_basket
-@app.route("/add_to_basket/<int:id>")
-def add_to_basket(id):
+@app.route("/add_to_basket/<int:id>/<int:qtyy>")
+def add_to_basket(id, qtyy):
     # {{ add_to_basket(product[0])}}
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
     user = session['username']
-    cur.callproc('sp_basketAddProduct', [id, user])
+    if qtyy > 0:
+        cur.callproc('sp_basketAddProduct', [id, user])
+        flash("Product Added to Basket", 'success')
+    else:
+        flash("Product Stock Insufficient", 'danger')
+
     conn.close()
-    flash("Product Added to Basket", 'success')
     check_basket_status()
     return redirect(url_for('products'))
 
 
 # increase_item_quantity in cart
-@app.route("/increase_item_quantity/<int:id>/<int:di>")
-def increase_item_quantity(id, di):
+@app.route("/increase_item_quantity/<int:id>/<int:di>/<int:qttyi>")
+def increase_item_quantity(id, di, qttyi):
     conn = mysql.connect()
     cur = conn.cursor()
     user = session['username']
-    cur.callproc('sp_basketAddProduct', [id, user])
-    conn.close()
 
-    check_basket_status()
-    if di == 10:
-        flash("Maximum quantity is 10. Contact us for bulk orders.", 'info')
+    if qttyi < 1:
+        flash("Product Stock Insufficient", 'danger')
     else:
-        flash("Product Added to Basket", 'success')
-    return redirect(url_for('basket'))
+        cur.callproc('sp_basketAddProduct', [id, user])
+        check_basket_status()
+        if di == 10:
+            flash("Maximum quantity is 10. Contact us for bulk orders.", 'info')
+        else:
+            flash("Product Added to Basket", 'success')
+
+    conn.close()
+    return basket()
 
 
 # remove_from_basket
@@ -300,7 +320,7 @@ def decrease_from_basket(id, di):
 @app.route('/basket.html', methods=['GET', 'POST'])
 @is_logged_in
 def basket():
-    global the_rows
+    global the_basket_rows
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
@@ -308,10 +328,10 @@ def basket():
     cur.callproc('sp_basketGetProducts', [user])
     bskt = cur.fetchall()
     conn.close()
-    the_rows = bskt
+    the_basket_rows = bskt
     check_basket_status()
     if bskt.__len__() > 0:
-        return render_template('basket.html', products=bskt)
+        return render_template('basket.html', products=bskt, prod=the_product_rows)
     else:
         msg = 'No products Found'
         return render_template('emptybasket.html', msg=msg)
@@ -321,7 +341,7 @@ def basket():
 @app.route('/checkout', methods=['GET', 'POST'])
 @is_logged_in
 def checkout():
-    global the_rows
+    global the_basket_rows
     # Create cursor
     conn = mysql.connect()
     cur = conn.cursor()
@@ -329,7 +349,7 @@ def checkout():
     cur.callproc('sp_basketGetProducts', [user])
     bskt = cur.fetchall()
     conn.close()
-    the_rows = bskt
+    the_basket_rows = bskt
     check_basket_status()
     if bskt.__len__() > 0:
         return render_template('checkout.html', products=bskt)
@@ -338,7 +358,26 @@ def checkout():
         return render_template('emptybasket.html', msg=msg)
 
 
-
+# Confirm Order.html
+@app.route('/confirm_order', methods=['GET', 'POST'])
+@is_logged_in
+def create_order():
+    global the_basket_rows
+    # Create cursor
+    conn = mysql.connect()
+    cur = conn.cursor()
+    user = session['username']
+    cur.callproc('sp_createOrder', [user])
+    bskt = cur.fetchall()
+    conn.close()
+    the_basket_rows = bskt
+    check_basket_status()
+    if bskt.__len__() == 0:
+        msg = 'Order Created Successfully!'
+        return render_template('home.html', products=bskt, msg=msg)
+    else:
+        msg = 'Something is wrong with the order'
+    return render_template('checkout.html', products=bskt, msg=msg)
 
 
 # Dashboard

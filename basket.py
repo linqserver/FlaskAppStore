@@ -1,5 +1,7 @@
 from flaskext.mysql import MySQL
 
+from Product import Product
+
 
 class Basket:
 
@@ -19,6 +21,13 @@ class Basket:
     def add_product_to_list(self, prod):
         self.products_list.append(prod)
         self.totalValue = self.calc_tot_val()
+
+    def check_qty_by_id(self, id):
+        for prod in self.products_list:
+            if prod.prod_id == id:
+                return prod.prod_stock
+            else:
+                return 0
 
     def reset(self):
         self.products_list = []
