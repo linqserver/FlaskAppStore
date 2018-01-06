@@ -4,6 +4,7 @@ from Product import Product
 from wtforms.fields import StringField
 from wtforms.widgets import TextArea
 import json
+
 ''' *******************************************************************
     *   IF ERROR on IMPORT MySQL ext flask mysql 
     *   THEN in terminal:
@@ -87,8 +88,6 @@ def product(prodid):
     conn.close()
     check_basket_status()
     return render_template('product.html', product=result)
-
-
 
 
 # Register Form Class
@@ -465,7 +464,7 @@ def edit_product(idd_edit):
         conn.close()
         flash((single_product[1]) + ' Was Successfully Updated', 'success')
         return redirect(url_for('dashboard'))
-    return render_template('add_product.html', form=form, basketStatus=the_basket)
+    return render_template('edit_product.html', form=form, basketStatus=the_basket)
 
 
 # Delete product
@@ -506,8 +505,9 @@ def high_charts():
     conn = mysql.connect()
     cur = conn.cursor()
     global the_product_rows
-    cur.execute("SELECT prod_name ,prod_stock FROM products")
+    cur.execute('SELECT prod_name ,prod_stock FROM products')
     product_names = cur.fetchall()
+
     conn.close()
     json_names = json.dumps(product_names)
     return render_template('visualization.html', products=the_product_rows, names=json_names)

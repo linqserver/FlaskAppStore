@@ -6,42 +6,116 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script>
+        $(function () {
+            var chart = new Highcharts.chart({
+                chart: {
+                    renderTo: 'container',
+                    type: 'column'
 
-    <script src="{{ url_for('static', filename='scripts/chartRafal.js') }}"></script>
+                },
+                title: {
+                    text: 'Rafal\'s Store Stock Visualization'
+                },
+                subtitle: {
+                    text: 'Store Stock Visualization'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: 0,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Quantity (units)'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Units'
+                },
+                plotOptions: {
+                    column: {
+                        zones: [{
+                            value: 10, // Values up to 10 (not including) ...
+                            color: 'red' // ... have the color blue.
+                        }, {
+                            color: '#9496FC' // Values from 10 (including) and up have the color red
+                        }]
+                    },
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    location.href = 'products'
+
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Quantity',
+                    data: {{ names|safe }},
+                    dataLabels: {
+                        enabled: true,
+                        rotation: 0,
+                        color: '#000000',
+                        align: 'center',
+                        format: '{point.y:.0f}', // one decimal
+                        y: 0,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            })
+        });
+    </script>
 
 
 
-<div>
-    <h1>HighCharts Visualization</h1>
+    <div>
+        <h1>HighCharts Visualization</h1>
 
-  <hr>
-  <table style="width: 400px;" class="table table-striped">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stock</th>
-      <th colspan="2"  style="text-align: center;" ></th>
+        <hr>
+        <table style="width: 400px;" class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th colspan="2" style="text-align: center;"></th>
 
-    </tr>
-    {% for product in products %}
-      <tr>
-        <td>{{product[0]}}</td>
-        <td>{{product[1]}}</td>
-        <td>&#8364; {{product[2]}}</td>
-        <td>{{product[3]}}</td>
-        <td>
-        <td>
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-</div>
-
-
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product[0] }}</td>
+                    <td>{{ product[1] }}</td>
+                    <td>&#8364; {{ product[2] }}</td>
+                    <td>{{ product[3] }}</td>
+                    <td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 
-<div id="container" style="min-width: 300px; height: 400px; margin: 0 auto"> {{ names }}</div>
+
+
+    <div id="container" style="min-width: 300px; height: 550px; margin: 0 auto"></div>
 
 
 

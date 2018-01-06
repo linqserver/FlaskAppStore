@@ -33,6 +33,16 @@ $(function() {
         tooltip: {
             pointFormat: 'Qty'
         },
+        plotOptions: {
+            column: {
+                zones: [{
+                    value: 10, // Values up to 10 (not including) ...
+                    color: 'red' // ... have the color blue.
+                }, {
+                    color: 'green' // Values from 10 (including) and up have the color red
+                }]
+            }
+        },
         series: [{
             name: 'Quantity',
             data: [
@@ -71,4 +81,4 @@ $(function() {
             }
         }]
     })
-}
+});
